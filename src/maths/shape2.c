@@ -4,7 +4,7 @@
 #include "maths/shape2.h"
 
 
-Shape2_t shape2_init(size_t nPoints, ...)
+Shape2_t shape2_initPoly(size_t nPoints, ...)
 {
 	Shape2_t shape;
 	shape.nPoints = nPoints;
@@ -24,7 +24,7 @@ Shape2_t shape2_init(size_t nPoints, ...)
 	return shape;
 }
 
-Shape2_t shape2_initRegular(size_t nPoints, float rVertex)
+Shape2_t shape2_initRegPoly(size_t nPoints, float rVertex)
 {
 	Shape2_t shape;
 	shape.nPoints = nPoints;
@@ -36,6 +36,8 @@ Shape2_t shape2_initRegular(size_t nPoints, float rVertex)
 	return shape;
 }
 
-bool shape2_boundsIntersect(Shape2_t *shape1, Shape2_t *shape2);
-
-Vec2_t shape2_intersectVector(Shape2_t *shape1, Shape2_t *shape2);
+Shape2_t shape2_initCircle(float r)
+{
+	Shape2_t ans = {r, 0, NULL};
+	return ans;
+}

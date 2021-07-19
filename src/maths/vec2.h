@@ -21,6 +21,9 @@ Vec2_t vec2_norm(Vec2_t v);
 float vec2_dot(Vec2_t v1, Vec2_t v2);
 
 
+float vec2_squareDist(Vec2_t v1, Vec2_t v2);
+
+
 
 
 

@@ -33,6 +33,14 @@ Vec2_t vec2_norm(Vec2_t v)
 
 float vec2_dot(Vec2_t v1, Vec2_t v2)
 {
-	double ans = v1.x*v2.x + v1.y*v2.y;
+	float ans = v1.x*v2.x + v1.y*v2.y;
 	return ans;
+}
+
+
+float vec2_squareDist(Vec2_t v1, Vec2_t v2)
+{
+	float xDiff = (v1.x-v2.x);
+	float yDiff = (v1.y-v2.y);
+	return xDiff*xDiff + yDiff*yDiff;
 }

@@ -5,15 +5,6 @@
 #include "body.h"
 
 
-/**
- * @brief Initialises a body with a desired mass @p m and position @p pos . 
- * 
- * @param pos The initial position of the body. 
- * @param shape The geometry of the body. 
- * @param m The mass of the body. 
- * @param I The inertia of the body. 
- * @return Body_t The body with the specified mass and position, with all other state variables zeroed. 
- */
 Body_t body_init(Vec2_t pos, Shape2_t shape, float m, float I)
 {
 	Body_t body = {
@@ -37,12 +28,7 @@ Body_t body_init(Vec2_t pos, Shape2_t shape, float m, float I)
 	return body;
 }
 
-/**
- * @brief Adds @p F to the net forces acting on @p body for this update step. 
- * 
- * @param body A reference to the body to apply a force to. 
- * @param F The force to apply. 
- */
+
 void body_applyForce(Body_t *body, Vec2_t F)
 {
 	if (!body->isLocked) {
@@ -59,19 +45,6 @@ void body_applyImpulse(Body_t *body, Vec2_t dp)
 }
 
 
-void body_collide(Body_t *b1, Body_t *b2, float F) {
-	Vec2_t dirAB = vec2_norm(vec2_diff(b2->x, b1->x));
-	body_applyForce(b1, vec2_scale(dirAB, F));
-	body_applyForce(b2, vec2_scale(dirAB, -F));
-}
-
-
-/**
- * @brief Applies the accumulated net force and update the state of @p body via simple Euler integration. 
- * 
- * @param body A reference to the body to update. 
- * @param dt The time difference between the last call to this function. 
- */
 void body_update(Body_t *body, float dt)
 {
 	if (!body->isLocked && !body->isActive) {
@@ -91,4 +64,19 @@ void body_update(Body_t *body, float dt)
 		float dtheta = body->omega*dt;
 		body->theta += dtheta;
 	}
+}
+
+
+
+
+
+bool body_couldCollide(const Body_t *body1, const Body_t *body2)
+{
+	return vec2_squareDist(body1->x, body2->x) <= body1->shape.rBound + body2->shape.rBound; //Is inside bounding circle. 
+}
+
+
+bool body_isColliding(Body_t *body1, Body_t *body2)
+{
+	//TODO
 }
