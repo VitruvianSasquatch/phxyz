@@ -1,11 +1,12 @@
 #include "common.h"
 #include "maths/vec2.h"
+#include "maths/pose2.h"
 #include "maths/shape2.h"
 
 #include "body.h"
 
 
-Body_t body_init(Vec2_t pos, Shape2_t shape, float m, float I)
+Body_t body_init(Vec2_t pos, Shape2_t shape, double m, double I)
 {
 	Body_t body = {
 		.isLocked = false,
@@ -45,7 +46,7 @@ void body_applyImpulse(Body_t *body, Vec2_t dp)
 }
 
 
-void body_update(Body_t *body, float dt)
+void body_update(Body_t *body, double dt)
 {
 	if (!body->isLocked && !body->isActive) {
 		//Linear:
@@ -57,11 +58,11 @@ void body_update(Body_t *body, float dt)
 		body->x = vec2_sum(body->x, dx);
 
 		//Rotational:
-		float alpha = body->tau/body->I;
+		double alpha = body->tau/body->I;
 		body->tau = 0;
-		float domega = alpha*dt;
+		double domega = alpha*dt;
 		body->omega += domega;
-		float dtheta = body->omega*dt;
+		double dtheta = body->omega*dt;
 		body->theta += dtheta;
 	}
 }
@@ -76,7 +77,21 @@ bool body_couldCollide(const Body_t *body1, const Body_t *body2)
 }
 
 
-bool body_isColliding(Body_t *body1, Body_t *body2)
+bool body_isColliding(const Body_t *body1, const Body_t *body2)
 {
-	//TODO
+	Vec2_t globalVerts1[body1->shape.nPoints];// = {VEC2_ZERO};
+	memset(globalVerts1, 0, body1->shape.nPoints*sizeof(Vec2_t));
+	Pose2_t globalPose1 = pose2_init(body1->x, body1->theta);
+	for (size_t i = 0; i < body1->shape.nPoints; i++) {
+		globalVerts1[i] = pose2_transformVec(body1->shape.vertices[i], globalPose1);
+	}
+
+	Vec2_t globalVerts2[body2->shape.nPoints];// = {VEC2_ZERO};
+	memset(globalVerts2, 0, body2->shape.nPoints*sizeof(Vec2_t));
+	Pose2_t globalPose2 = pose2_init(body2->x, body2->theta);
+	for (size_t i = 0; i < body2->shape.nPoints; i++) {
+		globalVerts2[i] = pose2_transformVec(body2->shape.vertices[i], globalPose2);
+	}
+
+	//test each line
 }

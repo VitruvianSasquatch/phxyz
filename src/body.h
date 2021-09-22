@@ -14,17 +14,17 @@ typedef struct {
 	Shape2_t shape; //CoM is at origin of shape. 
 
 	//State vars:
-	float m; //Mass
+	double m; //Mass
 	Vec2_t x; //Position
 	Vec2_t v; //Velocity
 
-	float I; //Rotational Inertia (kgm^2)
-	float theta; //Angular Position (rad)
-	float omega; //Angular Velocity (rad/s)
+	double I; //Rotational Inertia (kgm^2)
+	double theta; //Angular Position (rad)
+	double omega; //Angular Velocity (rad/s)
 
 	//Dynamic vars:
 	Vec2_t F; //Force
-	float tau; //Torque
+	double tau; //Torque
 } Body_t;
 
 
@@ -37,7 +37,7 @@ typedef struct {
  * @param I The inertia of the body. 
  * @return Body_t The body with the specified mass and position, with all other state variables zeroed. 
  */
-Body_t body_init(Vec2_t pos, Shape2_t shape, float m, float I);
+Body_t body_init(Vec2_t pos, Shape2_t shape, double m, double I);
 
 
 
@@ -59,7 +59,7 @@ void body_applyImpulse(Body_t *body, Vec2_t dp);
  * @param body A reference to the body to update. 
  * @param dt The time difference between the last call to this function. 
  */
-void body_update(Body_t *body, float dt);
+void body_update(Body_t *body, double dt);
 
 
 //----------------------Functions rather than methods---------------------
@@ -67,6 +67,6 @@ void body_update(Body_t *body, float dt);
 
 bool body_couldCollide(const Body_t *body1, const Body_t *body2);
 
-bool body_isColliding(Body_t *body1, Body_t *body2);
+bool body_isColliding(const Body_t *body1, const Body_t *body2);
 
 #endif //BODY_H

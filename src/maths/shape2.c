@@ -8,7 +8,7 @@ Shape2_t shape2_initPoly(size_t nPoints, ...)
 {
 	Shape2_t shape;
 	shape.nPoints = nPoints;
-	shape.vertices = calloc(nPoints, sizeof(float));
+	shape.vertices = calloc(nPoints, sizeof(double));
 	shape.rBound = 0;
 	
 	va_list args;
@@ -24,20 +24,21 @@ Shape2_t shape2_initPoly(size_t nPoints, ...)
 	return shape;
 }
 
-Shape2_t shape2_initRegPoly(size_t nPoints, float rVertex)
+Shape2_t shape2_initRegPoly(size_t nPoints, double rVertex)
 {
 	Shape2_t shape;
 	shape.nPoints = nPoints;
-	shape.vertices = calloc(nPoints, sizeof(float));
+	shape.vertices = calloc(nPoints, sizeof(double));
 	shape.rBound = rVertex;
 	for (size_t i = 0; i < nPoints; i++) {
-		shape.vertices[i] = (Vec2_t){cosf(i*2*PI/nPoints), sinf(i*2*PI/nPoints)}; //TODO: test
+		shape.vertices[i] = (Vec2_t){cos(i*2*PI/nPoints), sin(i*2*PI/nPoints)}; //TODO: test
 	}
 	return shape;
 }
 
-Shape2_t shape2_initCircle(float r)
+Shape2_t shape2_initCircle(double r)
 {
 	Shape2_t ans = {r, 0, NULL};
 	return ans;
 }
+

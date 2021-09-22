@@ -5,7 +5,7 @@
 #include "maths/vec2.h"
 
 typedef struct {
-	float rBound; //0 for point. 
+	double rBound; //0 for point. 
 	size_t nPoints; //0 for circle. 
 	Vec2_t *vertices; //Defined anticlockwise. 
 } Shape2_t;
@@ -13,9 +13,9 @@ typedef struct {
 
 Shape2_t shape2_initPoly(size_t nPoints, ...);
 
-Shape2_t shape2_initRegPoly(size_t nPoints, float rVertex);
+Shape2_t shape2_initRegPoly(size_t nPoints, double rVertex);
 
-Shape2_t shape2_initCircle(float r);
+Shape2_t shape2_initCircle(double r);
 
 //Shape2_t shape2_transformed(const Shape2_t *shape, Pose2_t pose);
 
