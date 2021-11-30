@@ -16,6 +16,7 @@
 #define	UDIV(n, d) ((n)<<1 + (d)) / ((d)<<1) /*Minimises error, only suitable for positives*/
 
 #define PI acos(0)
+#define TAU 2*PI
 
 typedef unsigned int uint; //Native databus size
 

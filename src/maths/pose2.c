@@ -13,6 +13,13 @@ Pose2_t pose2_init(Vec2_t position, double orientation)
 Pose2_t pose2_transformPose(Pose2_t base, Pose2_t applied)
 {
 	Pose2_t ans = base; //TODO: IMPLEMENT ME
+	ans.position.x = base.position.x*cos(applied.orientation) - base.position.y*sin(applied.orientation);
+	ans.position.x += applied.position.x;
+	ans.position.y = base.position.x*sin(applied.orientation) + base.position.y*cos(applied.orientation);
+	ans.position.y += applied.position.y;
+
+	ans.orientation += applied.orientation;
+	fmod(ans.orientation, TAU);
 	return ans;
 }
 
