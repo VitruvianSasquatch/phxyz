@@ -46,3 +46,8 @@ double vec2_squareDist(Vec2_t v1, Vec2_t v2)
 	double yDiff = (v1.y-v2.y);
 	return xDiff*xDiff + yDiff*yDiff;
 }
+
+
+void vec2_print(Vec2_t v) {
+	printf("(%.2lf, %.2lf)", v.x, v.y);
+}

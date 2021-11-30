@@ -9,6 +9,7 @@
 #include <string.h> //memcpy etc
 #include <stdarg.h> //Variadic funcs
 #include <math.h>
+#include <stdio.h> //For debug
 
 
 #define IDIV(n, d) ((n) + (d)/2) / (d) /*Minimises overflow, handles signed values*/

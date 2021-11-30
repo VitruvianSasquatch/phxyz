@@ -63,8 +63,10 @@ void closeSDL(SDL_Window *window, SDL_Renderer *renderer)
 }
 
 
-
+#include "maths/vec2.h"
 int main(void)
 {
-	
+	Vec2_t v = {3, 4};
+	printf("%lf\n", vec2_mag(v));
+
 }
