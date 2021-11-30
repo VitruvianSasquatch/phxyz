@@ -79,6 +79,7 @@ bool body_couldCollide(const Body_t *body1, const Body_t *body2)
 
 bool body_isColliding(const Body_t *body1, const Body_t *body2)
 {
+	//FIXME: Consider doing the intersection check in the frame of one of the bodies?
 	Vec2_t globalVerts1[body1->shape.nPoints];// = {VEC2_ZERO};
 	memset(globalVerts1, 0, body1->shape.nPoints*sizeof(Vec2_t));
 	Pose2_t globalPose1 = pose2_init(body1->x, body1->theta);
@@ -93,5 +94,7 @@ bool body_isColliding(const Body_t *body1, const Body_t *body2)
 		globalVerts2[i] = pose2_transformVec(body2->shape.vertices[i], globalPose2);
 	}
 
-	//test each line
+	//TODO: test each line segment pair for intersection. For now, though, being lazy...
+	return true;
+
 }
