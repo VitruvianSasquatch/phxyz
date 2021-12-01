@@ -28,7 +28,7 @@ Shape2_t shape2_initRegPoly(size_t nPoints, double rVertex)
 {
 	Shape2_t shape;
 	shape.nPoints = nPoints;
-	shape.vertices = calloc(nPoints, sizeof(double));
+	shape.vertices = calloc(nPoints, sizeof(Vec2_t));
 	shape.rBound = rVertex;
 	for (size_t i = 0; i < nPoints; i++) {
 		shape.vertices[i] = (Vec2_t){cos(i*2*PI/nPoints), sin(i*2*PI/nPoints)}; //TODO: test

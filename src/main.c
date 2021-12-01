@@ -24,7 +24,7 @@ bool initSDL(const char *title, int width, int height, SDL_Window **window, SDL_
 {
 	bool success = true;
 	if ( SDL_Init(SDL_INIT_VIDEO) < 0) {
-		fprintf(stderr, "Could not initialise SDL: %s\n", SDL_GetError());
+		fprintf(stderr, "Could not initialise SmaDL: %s\n", SDL_GetError());
 		success = false;
 	}
 
@@ -64,9 +64,31 @@ void closeSDL(SDL_Window *window, SDL_Renderer *renderer)
 
 
 #include "maths/vec2.h"
+#include "maths/shape2.h"
+#include "body.h"
+
+#define NUM_BODIES 10
 int main(void)
 {
-	Vec2_t v = {3, 4};
-	printf("%lf\n", vec2_mag(v));
+	Body_t bodies[NUM_BODIES];
+	for (size_t i = 0; i < NUM_BODIES; i++) {
+		Vec2_t pos = {i, 0};
+		Shape2_t shape = shape2_initRegPoly(4, 0.25);
+		bodies[i] = body_init(pos, shape, 1, 1);
+		body_applyImpulse(&bodies[i], (Vec2_t){1, 1});
+	}
+
+	clock_t oldTime = clock();
+	while (1) {
+		clock_t newTime = clock();
+		size_t dt = newTime - oldTime;
+		for (size_t i = 0; i < NUM_BODIES; i++) {
+			body_update(&bodies[i], dt);
+		}
+		oldTime = newTime;
+
+		vec2_print(bodies[0].x);
+		puts("");
+	}
 
 }

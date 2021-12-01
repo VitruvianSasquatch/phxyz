@@ -48,7 +48,7 @@ void body_applyImpulse(Body_t *body, Vec2_t dp)
 
 void body_update(Body_t *body, double dt)
 {
-	if (!body->isLocked && !body->isActive) {
+	if (!body->isLocked && body->isActive) {
 		//Linear:
 		Vec2_t a = vec2_scale(body->F, 1/body->m);
 		body->F = VEC2_ZERO;
