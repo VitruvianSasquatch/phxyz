@@ -67,27 +67,29 @@ void closeSDL(SDL_Window *window, SDL_Renderer *renderer)
 #include "maths/shape2.h"
 #include "body.h"
 
-#define NUM_BODIES 10
+#include "phxy.h"
+
+
 int main(void)
 {
-	Body_t bodies[NUM_BODIES];
-	for (size_t i = 0; i < NUM_BODIES; i++) {
+	Phxy_t world = phxy_init();
+	Shape2_t square = shape2_initRegPoly(4, 0.25);
+
+	for (size_t i = 0; i < 10; i++) {
 		Vec2_t pos = {i, 0};
-		Shape2_t shape = shape2_initRegPoly(4, 0.25);
-		bodies[i] = body_init(pos, shape, 1, 1);
-		body_applyImpulse(&bodies[i], (Vec2_t){1, 1});
+		
+		PhxyId_t id = phxy_addBody(&world, body_init(pos, square, 1, 1));
+		phxy_applyImpulse(&world, id, (Vec2_t){1, 1});
 	}
 
 	clock_t oldTime = clock();
 	while (1) {
 		clock_t newTime = clock();
-		size_t dt = newTime - oldTime;
-		for (size_t i = 0; i < NUM_BODIES; i++) {
-			body_update(&bodies[i], dt);
-		}
+		double dt = (newTime - oldTime)/1000;
+		phxy_update(&world, dt);
 		oldTime = newTime;
 
-		vec2_print(bodies[0].x);
+		vec2_print(world.bodies[0].x);
 		puts("");
 	}
 
