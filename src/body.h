@@ -11,11 +11,12 @@ typedef struct {
 	bool isActive;
 
 	//Shape vars:
-	Shape2_t shape; //CoM is at origin of shape. 
+	Shape2_t *shape; //CoM is at origin of shape. 
 
 	//State vars:
 	double m; //Mass
-	Vec2_t x; //Position
+
+	Vec2_t pos; //Position
 	Vec2_t v; //Velocity
 
 	double I; //Rotational Inertia (kgm^2)
@@ -37,7 +38,7 @@ typedef struct {
  * @param I The inertia of the body. 
  * @return Body_t The body with the specified mass and position, with all other state variables zeroed. 
  */
-Body_t body_init(Vec2_t pos, Shape2_t shape, double m, double I);
+Body_t body_init(Vec2_t pos, Shape2_t *shape, double m, double I);
 
 
 

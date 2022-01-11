@@ -14,6 +14,7 @@ Phxy_t phxy_init(void)
 		return phxy;
 	} //If we don't have enough heap for that, we have a problem. 
 	puts("Out of heap memory.");
+	return phxy;
 }
 
 

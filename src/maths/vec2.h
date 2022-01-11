@@ -67,6 +67,16 @@ double vec2_dot(Vec2_t v1, Vec2_t v2);
 
 
 /**
+ * @brief Finds the pseudo cross product of the two passed vectors. Note that this essentially projects the vectors into 3-space, then extracts the z-component of their cross. 
+ * 
+ * @param v1 The first vector to be crossed. 
+ * @param v2 The second vector to be crossed. 
+ * @return double The z-component of @p v1 cross @p v2 . 
+ */
+double vec2_cross(Vec2_t v1, Vec2_t v2);
+
+
+/**
  * @brief Finds the squared distance between two vectors. 
  * 
  * @param v1 The first vector on the line. 
@@ -84,7 +94,27 @@ double vec2_squareDist(Vec2_t v1, Vec2_t v2);
 void vec2_print(Vec2_t v);
 
 
+/**
+ * @brief Determines whether two line segments, a and b, intersect. 
+ * 
+ * @param a1 The first endpoint of line segment a
+ * @param a2 The second endpoint of line segment a
+ * @param b1 The first endpoint of line segment b
+ * @param b2 The second endpoint of line segment b
+ * @return true The line segments intersect. 
+ * @return false The line segments do not intersect. 
+ */
+bool vec2_lineIntersect(Vec2_t a1, Vec2_t a2, Vec2_t b1, Vec2_t b2);
 
+
+/**
+ * @brief Finds the normal to the line between @p p1 and @p p2, rightward in the direction of travel. 
+ * 
+ * @param p1 
+ * @param p2 
+ * @return Vec2_t The rightward normal to the described line. 
+ */
+Vec2_t vec2_lineNormal(Vec2_t p1, Vec2_t p2);
 
 
 

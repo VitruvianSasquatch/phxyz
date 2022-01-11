@@ -4,6 +4,8 @@
 #include "common.h"
 #include "maths/vec2.h"
 
+
+//Use bounding circle to filter collisions, not AABBs. 
 typedef struct {
 	double rBound; //0 for point. 
 	size_t nPoints; //0 for circle. 

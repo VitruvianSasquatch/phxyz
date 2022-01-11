@@ -72,13 +72,21 @@ void closeSDL(SDL_Window *window, SDL_Renderer *renderer)
 
 int main(void)
 {
+	Vec2_t a1 = {0, -2};
+	Vec2_t a2 = {-1, 0};
+	Vec2_t b1 = {1, 0};
+	Vec2_t b2 = {0, 2};
+
+	printf("%d\n", vec2_lineIntersect(a1, a2, b1, b2));
+
+	/*
 	Phxy_t world = phxy_init();
 	Shape2_t square = shape2_initRegPoly(4, 0.25);
 
 	for (size_t i = 0; i < 10; i++) {
 		Vec2_t pos = {i, 0};
 		
-		PhxyId_t id = phxy_addBody(&world, body_init(pos, square, 1, 1));
+		PhxyId_t id = phxy_addBody(&world, body_init(pos, &square, 1, 1));
 		phxy_applyImpulse(&world, id, (Vec2_t){1, 1});
 	}
 
@@ -89,8 +97,8 @@ int main(void)
 		phxy_update(&world, dt);
 		oldTime = newTime;
 
-		vec2_print(world.bodies[0].x);
+		vec2_print(world.bodies[0].pos);
 		puts("");
 	}
-
+	*/
 }
