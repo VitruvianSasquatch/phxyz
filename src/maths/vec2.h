@@ -77,6 +77,15 @@ double vec2_cross(Vec2_t v1, Vec2_t v2);
 
 
 /**
+ * @brief Finds the squared magnitude of a vector. 
+ * 
+ * @param v The vector to find the square length of. 
+ * @return double The squared length of @p v . 
+ */
+double vec2_squareMag(Vec2_t v);
+
+
+/**
  * @brief Finds the squared distance between two vectors. 
  * 
  * @param v1 The first vector on the line. 

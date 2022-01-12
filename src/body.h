@@ -5,40 +5,51 @@
 #include "maths/vec2.h"
 #include "maths/shape2.h"
 
+//TODO: Consider restructuring as recommended in https://gamedevelopment.tutsplus.com/tutorials/how-to-create-a-custom-2d-physics-engine-the-core-engine--gamedev-7493
+
+
+typedef struct {
+	double density; //Density (kg/m^2)
+	double restitution;
+	double staticFriction;
+	double dynamicFriction;
+} Material_t;
+
+
+
 typedef struct {
 	//Enabling vars:
 	bool isLocked;
 	bool isActive;
 
-	//Shape vars:
+	//Attribute vars:
 	Shape2_t *shape; //CoM is at origin of shape. 
+	Material_t material;
 
 	//State vars:
 	double m; //Mass
-
-	Vec2_t pos; //Position
-	Vec2_t v; //Velocity
+	Vec2_t pos; //Position (m)
+	Vec2_t v; //Velocity (m/s)
 
 	double I; //Rotational Inertia (kgm^2)
 	double theta; //Angular Position (rad)
 	double omega; //Angular Velocity (rad/s)
 
-	//Dynamic vars:
-	Vec2_t F; //Force
-	double tau; //Torque
+	//Temporary vars:
+	Vec2_t F; //Force (N)
+	double tau; //Torque (Nm)
 } Body_t;
 
 
 /**
- * @brief Initialises a body with a desired mass @p m and position @p pos . 
+ * @brief Initialises a body with a specified position @p pos and material @p material . 
  * 
  * @param pos The initial position of the body. 
  * @param shape The geometry of the body. 
- * @param m The mass of the body. 
- * @param I The inertia of the body. 
- * @return Body_t The body with the specified mass and position, with all other state variables zeroed. 
+ * @param material The mass of the body. 
+ * @return Body_t The body with the specified material and position, with all other state variables zeroed. 
  */
-Body_t body_init(Vec2_t pos, Shape2_t *shape, double m, double I);
+Body_t body_init(Vec2_t pos, Shape2_t *shape, Material_t material);
 
 
 

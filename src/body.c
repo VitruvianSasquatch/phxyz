@@ -6,13 +6,16 @@
 #include "body.h"
 
 
-Body_t body_init(Vec2_t pos, Shape2_t *shape, double m, double I)
+Body_t body_init(Vec2_t pos, Shape2_t *shape, Material_t material)
 {
+	double m = material.density * shape2_area(shape);
+	double I = m * shape2_unitInertia(shape);
 	Body_t body = {
 		.isLocked = false,
 		.isActive = true,
 
 		.shape = shape,
+		.material = material,
 
 		.m = m, 
 		.pos = pos, 
@@ -97,7 +100,8 @@ bool body_isColliding(const Body_t *body1, const Body_t *body2)
 
 	//TODO: Do more collision. 
 
-	Vec2_t normals[body1->shape.nPoints*body2->shape.nPoints] = {VEC2_ZERO};
+	Vec2_t normals[body1->shape->nPoints*body2->shape->nPoints];
+	memset(normals, 0, sizeof(Vec2_t)*body1->shape->nPoints*body2->shape->nPoints);
 
 	//test each line segment pair for intersection. 
 	for (size_t i = 0; i < body1->shape->nPoints-1; i++) {

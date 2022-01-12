@@ -24,6 +24,7 @@ Shape2_t shape2_initPoly(size_t nPoints, ...)
 	return shape;
 }
 
+
 Shape2_t shape2_initRegPoly(size_t nPoints, double rVertex)
 {
 	Shape2_t shape;
@@ -36,9 +37,38 @@ Shape2_t shape2_initRegPoly(size_t nPoints, double rVertex)
 	return shape;
 }
 
+
 Shape2_t shape2_initCircle(double r)
 {
 	Shape2_t ans = {r, 0, NULL};
 	return ans;
+}
+
+
+double shape2_area(const Shape2_t *shape)
+{
+	double area = 0;
+	for (size_t i = 0; i < shape->nPoints-1; i++) {
+		area += vec2_cross(shape->vertices[i], shape->vertices[i+1]);
+	}
+	area += vec2_cross(shape->vertices[shape->nPoints-1], shape->vertices[0]);
+	return area/2;
+}
+
+
+double shape2_unitInertia(const Shape2_t *shape)
+{
+	double num = 0;
+	double denom = 0;
+	for (size_t i = 0; i < shape->nPoints-1; i++) {
+		double cross = vec2_cross(shape->vertices[i], shape->vertices[i+1]);
+		num += cross * vec2_squareMag(shape->vertices[i]) * vec2_dot(shape->vertices[i], shape->vertices[i+1]) * vec2_squareMag(shape->vertices[i+1]);
+		denom += cross;
+	}
+	double cross = vec2_cross(shape->vertices[shape->nPoints-1], shape->vertices[0]);
+	num += cross * vec2_squareMag(shape->vertices[shape->nPoints-1]) * vec2_dot(shape->vertices[shape->nPoints-1], shape->vertices[0]) * vec2_squareMag(shape->vertices[0]);
+	denom += cross;
+
+	return num / (6*denom);
 }
 

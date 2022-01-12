@@ -20,7 +20,19 @@ Phxy_t phxy_init(void)
 
 void phxy_update(Phxy_t *phxy, double dt)
 {
-	//TODO: Check collisions. 
+	//Check for possible collisions:
+	for (size_t i = 0; i < phxy->numBodies; i++) {
+		for (size_t j = 0; j < phxy->numBodies; j++) {
+			if (i == j) {
+				continue; //Skip self check. 
+			} else if (body_couldCollide(&phxy->bodies[i], &phxy->bodies[j])) {
+				//TODO: Add collision candidate to list. 
+			}
+		}
+	}
+
+	//TODO: Handle collisions. 
+
 	for (size_t i = 0; i < phxy->numBodies; i++) {
 		if (phxy->isUsed[i]) {
 			body_update(&phxy->bodies[i], dt);

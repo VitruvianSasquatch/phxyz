@@ -1,0 +1,3 @@
+[submodule "deps/gnulib"]
+	path = deps/gnulib
+	url = https://git.savannah.gnu.org/git/gnulib.git

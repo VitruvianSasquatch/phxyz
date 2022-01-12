@@ -47,6 +47,12 @@ double vec2_cross(Vec2_t v1, Vec2_t v2)
 }
 
 
+double vec2_squareMag(Vec2_t v)
+{
+	return v.x*v.x + v.y*v.y;
+}
+
+
 double vec2_squareDist(Vec2_t v1, Vec2_t v2)
 {
 	double xDiff = (v1.x-v2.x);
