@@ -24,7 +24,7 @@ typedef struct {
 
 	//Attribute vars:
 	Shape2_t *shape; //CoM is at origin of shape. 
-	Material_t material;
+	Material_t *material;
 
 	//State vars:
 	double m; //Mass
@@ -46,11 +46,10 @@ typedef struct {
  * 
  * @param pos The initial position of the body. 
  * @param shape The geometry of the body. 
- * @param material The mass of the body. 
+ * @param material The material of the body. 
  * @return Body_t The body with the specified material and position, with all other state variables zeroed. 
  */
-Body_t body_init(Vec2_t pos, Shape2_t *shape, Material_t material);
-
+Body_t body_init(Vec2_t pos, Shape2_t *shape, Material_t *material);
 
 
 /**

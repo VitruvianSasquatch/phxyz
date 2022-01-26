@@ -68,16 +68,29 @@ void closeSDL(SDL_Window *window, SDL_Renderer *renderer)
 #include "body.h"
 
 #include "phxy.h"
+#include "instancer.h"
 
 
 int main(void)
 {
-	Vec2_t a1 = {0, -2};
-	Vec2_t a2 = {-1, 0};
-	Vec2_t b1 = {1, 0};
-	Vec2_t b2 = {0, 2};
+	Instancer_t instancer = instancer_init();
 
-	printf("%d\n", vec2_lineIntersect(a1, a2, b1, b2));
+	for (size_t i = 0; i < 5; i++) {
+		instancer_add(&instancer, (Body_t){.m = i});
+	}
+
+	instancer_remove(&instancer, 2);
+	instancer_remove(&instancer, 3);
+	instancer_remove(&instancer, 4);
+
+	instancer_add(&instancer, (Body_t){.m = -5});
+	instancer_add(&instancer, (Body_t){.m = -5});
+
+	instancer_remove(&instancer, 1);
+	instancer_add(&instancer, (Body_t){.m = -5});
+	instancer_add(&instancer, (Body_t){.m = -5});
+	instancer_add(&instancer, (Body_t){.m = -5});
+
 
 	/*
 	Phxy_t world = phxy_init();

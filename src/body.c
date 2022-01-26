@@ -6,9 +6,9 @@
 #include "body.h"
 
 
-Body_t body_init(Vec2_t pos, Shape2_t *shape, Material_t material)
+Body_t body_init(Vec2_t pos, Shape2_t *shape, Material_t *material)
 {
-	double m = material.density * shape2_area(shape);
+	double m = material->density * shape2_area(shape);
 	double I = m * shape2_unitInertia(shape);
 	Body_t body = {
 		.isLocked = false,

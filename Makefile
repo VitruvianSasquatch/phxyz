@@ -49,3 +49,7 @@ clean :
 .PHONY : run
 run : all
 	./$(BUILD_DIR)/$(BIN)
+
+.PHONY : run
+debug : all
+	gdb ./$(BUILD_DIR)/$(BIN)
