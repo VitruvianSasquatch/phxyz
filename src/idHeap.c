@@ -25,7 +25,7 @@ static void bubbleUp(IdHeap_t *heap, size_t idIndex)
 }
 
 
-static void bubbleDown(IdHeap_t *heap, size_t idIndex)
+static void bubbleDown(IdHeap_t *heap, size_t idIndex) //FIXME: Fix me. 
 {
 	while (LCHILD(idIndex) < heap->numOccupied) { //We have at least one child
 
